@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekap Nilai - Pemrograman Web</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Urutan penting: data -> api -> nilai -> app.
+       defer = file dijalankan setelah HTML selesai dibaca (elemen sudah ada). -->
+  <script src="data.js" defer></script>
+  <script src="api.js" defer></script>
+  <script src="nilai.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Rekap Nilai Pemrograman Web</h1>
+    <p>Data dari <code>api.js</code> (Promise + localStorage) &middot; nilai akhir &amp; grade dihitung oleh <code>nilai.js</code></p>
+  </header>
+
+  <main>
+    <section class="statistik" aria-label="Statistik kelas">
+      <div class="kartu"><span class="label">Jumlah</span><span id="stat-jumlah" class="angka">-</span></div>
+      <div class="kartu"><span class="label">Lulus</span><span id="stat-lulus" class="angka">-</span></div>
+      <div class="kartu"><span class="label">Rata-rata</span><span id="stat-rata" class="angka">-</span></div>
+      <div class="kartu"><span class="label">Tertinggi</span><span id="stat-tertinggi" class="angka kecil">-</span></div>
+      <div class="kartu lebar"><span class="label">Distribusi grade</span><span id="stat-distribusi" class="angka kecil">-</span></div>
+    </section>
+
+    <section>
+      <h2>Tambah Mahasiswa</h2>
+      <form id="form-mahasiswa" novalidate>
+        <input name="nim" placeholder="NIM (7 digit)" inputmode="numeric" maxlength="7" required>
+        <input name="nama" placeholder="Nama lengkap" required>
+        <input name="tugas" type="number" min="0" max="100" placeholder="Tugas" required>
+        <input name="uts" type="number" min="0" max="100" placeholder="UTS" required>
+        <input name="uas" type="number" min="0" max="100" placeholder="UAS" required>
+        <button type="submit">Simpan</button>
+      </form>
+      <p id="pesan" role="status"></p>
+    </section>
+
+    <section>
+      <div class="judul-tabel">
+        <h2>Daftar Nilai</h2>
+        <input id="cari" type="search" placeholder="Cari nama..." autocomplete="off">
+      </div>
+      <div class="bungkus-tabel">
+        <table>
+          <thead>
+            <tr>
+              <th>NIM</th><th>Nama</th><th>Tugas</th><th>UTS</th><th>UAS</th>
+              <th>Nilai Akhir</th><th>Grade</th><th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tabel-body">
+            <tr><td colspan="8" class="kosong">Memuat data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
